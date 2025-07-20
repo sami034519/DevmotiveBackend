@@ -27,18 +27,20 @@ router.post("/", async (req, res) => {
 
     // Email content
     const mailOptions = {
-      from: `"${name}" <${email}>`,
-      to: process.env.TO_EMAIL, // where you want to receive messages
-      subject: `📩 Contact Form: ${subject}`,
-      html: `
-        <h2>📬 New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Subject:</strong> ${subject}</p>
-        <p><strong>Message:</strong></p>
-        <p>${message}</p>
-      `,
-    };
+  from: `"${name}" <${process.env.EMAIL_USER}>`, // Use your domain email as sender
+  replyTo: email, // User's email to reply back
+  to: process.env.TO_EMAIL, // The recipient (your mailbox)
+  subject: `📩 Contact Form: ${subject}`,
+  html: `
+    <h2>📬 New Contact Form Submission</h2>
+    <p><strong>Name:</strong> ${name}</p>
+    <p><strong>Email:</strong> ${email}</p>
+    <p><strong>Subject:</strong> ${subject}</p>
+    <p><strong>Message:</strong></p>
+    <p>${message}</p>
+  `,
+};
+
 
     // Send email
     await transporter.sendMail(mailOptions);
