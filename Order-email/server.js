@@ -6,8 +6,9 @@ const app = express();
 
 // ✅ List of all allowed frontend domains
 const allowedOrigins = [
+  "https://www.devmotive.uk/",
  "https://devmotive.vercel.app",
-  "http://localhost:3000", 
+ "http://localhost:3000", 
 ];
 
 // ✅ CORS middleware
